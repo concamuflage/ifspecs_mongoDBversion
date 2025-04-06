@@ -1,0 +1,13 @@
+{
+  "folders": [
+	{
+		"name": "ifspecs_mongoDBversion",
+		"path": "."
+	},
+	{
+		"name": "raw_data",
+		"path": "../raw_data"
+	}
+],
+  "settings": {}
+}
