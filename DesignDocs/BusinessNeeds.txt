@@ -1,0 +1,15 @@
+1 What are the latest models in market?
+2 What are their main features?
+    Model Name
+    Brand
+    Gpu
+    Cpu
+    ScreenSize
+    ScreenType
+    Time
+    Price
+
+3 What are the most popular GPUs in a given price range last year?
+4 What are the most popular CPUs in a given price range last year?
+5 Who launched the most models in a given time slot?
+6 Given certain features, which models are my competitors in the market?  

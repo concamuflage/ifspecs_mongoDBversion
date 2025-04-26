@@ -1,0 +1,123 @@
+{
+    "taskDefinitionArn": "arn:aws:ecs:us-west-2:456630344294:task-definition/mango_task:3",
+    "containerDefinitions": [
+        {
+            "name": "mongo_container",
+            "image": "mongo:latest",
+            "command": [
+                "--replSet", "rs0",
+                "--bind_ip_all",
+                "--auth",
+                "--keyFile", "/etc/secrets/mongo-keyfile"
+              ],
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "name": "mongo_container-27017-tcp",
+                    "containerPort": 27017,
+                    "hostPort": 27017,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "MONGO_INITDB_REPLICASET",
+                    "value": "rs0"
+                },
+                {
+                    "name": "MONGODB_EXTRA_FLAGS",
+                    "value": "--bind_ip_all"
+                }
+            ],
+            "environmentFiles": [],
+            "mountPoints": [
+                {
+                    "sourceVolume": "efs_volume",
+                    "containerPath": "/data/db",
+                    "readOnly": false
+                }
+            ],
+            "volumesFrom": [],
+            "ulimits": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/mango_task",
+                    "mode": "non-blocking",
+                    "awslogs-create-group": "true",
+                    "max-buffer-size": "25m",
+                    "awslogs-region": "us-west-2",
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            },
+            "systemControls": []
+        }
+    ],
+    "family": "mango_task",
+    "executionRoleArn": "arn:aws:iam::456630344294:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "revision": 3,
+    "volumes": [
+        {
+            "name": "efs_volume",
+            "efsVolumeConfiguration": {
+                "fileSystemId": "fs-0297f08d08433a2ed",
+                "rootDirectory": "/"
+            }
+        }
+    ],
+    "status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "ecs.capability.efsAuth"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "ecs.capability.efs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.28"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.25"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+        }
+    ],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "1024",
+    "memory": "3072",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "registeredAt": "2025-04-13T18:07:17.918Z",
+    "registeredBy": "arn:aws:iam::456630344294:root",
+    "enableFaultInjection": false,
+    "tags": []
+}
