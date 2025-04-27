@@ -1,0 +1,1 @@
+    // await db.collection('products').createIndex({ brand: 1 });

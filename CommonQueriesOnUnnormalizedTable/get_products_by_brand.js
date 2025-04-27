@@ -2,14 +2,7 @@ const connectDB = require("../database_connect");
 
 async function getProductsByBrand(brandName) {
   const db = await connectDB();
-
-  const brand = await db.collection('brands').findOne({ name: brandName });
-  if (!brand) {
-    console.log(`Brand "${brandName}" not found.`);
-    return [];
-  }
-
-  const products = await db.collection('products').find({ brand: brand._id }).toArray();
+  const products = await db.collection('products_not_normalized').find({ brand: brandName }).toArray();
   return products;
 }
 

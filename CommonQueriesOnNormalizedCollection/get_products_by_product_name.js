@@ -9,18 +9,6 @@ async function getProductsByName(nameQuery) {
       }
     },
 
-    /* 
-    the following lookup stage add a new attribute brandInfo like the following one.
-    {
-          name: "iPhone 15",
-          brand: ObjectId("..."),
-          brandInfo: [
-            {
-              _id: ObjectId("..."),
-              name: "Apple"
-            }
-          ]
-        } */
     {
       $lookup: {
         from: "brands",
