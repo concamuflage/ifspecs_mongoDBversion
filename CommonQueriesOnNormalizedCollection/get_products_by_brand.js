@@ -1,8 +1,6 @@
 const connectDB = require("../database_connect");
 
-async function getProductsByBrand(brandName) {
-  const db = await connectDB();
-
+async function getProductsByBrand(db,brandName) {
   const brand = await db.collection('brands').findOne({ name: brandName });
   if (!brand) {
     console.log(`Brand "${brandName}" not found.`);
@@ -192,7 +190,8 @@ async function getProductsByBrand(brandName) {
   return products;
 }
 
-(async () => {
-    const products = await getProductsByBrand("Apple");
-    console.log(products);
-})();
+module.exports = getProductsByBrand;
+// (async () => {
+//     const products = await getProductsByBrand("Apple");
+//     console.log(products);
+// })();

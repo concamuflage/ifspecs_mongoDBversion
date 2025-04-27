@@ -1,7 +1,4 @@
-async function addIndexes() {
-    const connectDB = require("../database_connect");
-    const db = await connectDB();
-
+async function addIndexes(db) {
     try {
         await db.collection('products').createIndex({ brand: 1 });
         console.log('Index created for brand');
@@ -61,10 +58,5 @@ async function addIndexes() {
 
 }
 
-addIndexes().then(() => {
-  console.log("Indexes created successfully.");
-  process.exit(0);
-}).catch(err => {
-  console.error("Error creating indexes:", err);
-  process.exit(1);
-});
+
+module.exports = addIndexes
