@@ -1,1 +1,1 @@
-const connectDB = require("../database_connect");
+    console.log(products)
