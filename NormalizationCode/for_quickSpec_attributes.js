@@ -32,19 +32,23 @@ async function normalizeQuickSpecField(db,fieldName) {
 
     const fieldDoc = await fieldCollection.findOne({ name: value });
     const result = await db.collection('products').updateMany(
+      // Match documents where quickSpec array contains an element with the specified field name and value
       {
         quickSpec: {
           $elemMatch: {
             name: fieldName,
-            value:value
+            value: value
           }
         }
       },
+      // Set the matched quickSpec element's value to the corresponding normalized _id
       {
         $set: {
           "quickSpec.$[spec].value": fieldDoc._id
         }
       },
+      // Filter to precisely target the matching element inside quickSpec array using arrayFilters
+      // to generate $[spec] this to be used above.
       {
         arrayFilters: [
           { "spec.name": fieldName, "spec.value": value }
