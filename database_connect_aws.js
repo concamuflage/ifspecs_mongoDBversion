@@ -1,9 +1,9 @@
 require('dotenv').config();
 const { MongoClient } = require('mongodb');
 
-const username = process.env.GCLOUD_DB_USER;
-const password = process.env.GCLOUD_DB_PASS;
-const uri = `mongodb://${username}:${password}@first-workload-balancer-5d69eb87e6158a86.elb.us-west-2.amazonaws.com:27017/ifspecs?directConnection=true`;
+const username = process.env.AWS_DB_USER;
+const password = process.env.AWS_DB_PASS;
+const uri = `mongodb://${username}:${password}@ec2-54-200-9-245.us-west-2.compute.amazonaws.com:27017/admin?directConnection=true&authSource=admin`;
 
 const client = new MongoClient(uri);
 let isConnected = false;
@@ -27,4 +27,4 @@ async function aws_connectDB() {
 
 module.exports = aws_connectDB;
 
-// aws_connectDB()
+aws_connectDB()
